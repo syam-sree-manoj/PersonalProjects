@@ -1,0 +1,89 @@
+Thread Lifecycle
+    NEW → Thread created, but not started.
+    RUNNABLE → Ready to run or currently executing.
+    BLOCKED → Waiting to acquire a lock.
+    WAITING → Waiting indefinitely for a signal.
+    TIMED_WAITING → Waiting for a signal with a timeout.
+    TERMINATED → Execution completed.
+
+NEW
+    Description: The thread has been created but has not yet started.
+    How to Reach: A thread is in this state immediately after being created using the Thread class, but before start() is called.
+    Example:
+        Thread t = new Thread();
+        System.out.println(t.getState()); // Outputs: NEW
+
+RUNNABLE
+    Description: The thread is ready to run and is waiting for CPU time to execute.
+    How to Reach: When start() is called, the thread enters the RUNNABLE state. The actual execution depends on the thread scheduler.
+    Note: In Java, the RUNNABLE state includes both "ready to run" and "running" threads.
+    Example:
+        Thread t = new Thread(() -> {
+            while (true) {}
+        });
+        t.start();
+        System.out.println(t.getState()); // Outputs: RUNNABLE
+
+BLOCKED
+    Description: The thread is waiting to acquire a lock (e.g., trying to enter a synchronized block or method held by another thread).
+    How to Reach: A thread moves to BLOCKED when it attempts to access a critical section that is locked by another thread.
+    Example
+        public class BlockedStateExample {
+            public static synchronized void criticalSection() {
+                while (true) {}
+            }
+
+            public static void main(String[] args) {
+                Thread t1 = new Thread(() -> criticalSection());
+                Thread t2 = new Thread(() -> criticalSection());
+
+                t1.start();
+                t2.start();
+
+                try { Thread.sleep(100); } catch (InterruptedException e) {}
+
+                System.out.println(t2.getState()); // Outputs: BLOCKED
+            }
+        }
+
+WAITING
+    Description: The thread is waiting indefinitely for another thread to signal or notify it.
+    How to Reach:
+    Using methods like Object.wait() (without a timeout).
+    Using Thread.join() (without a timeout).
+    Example
+        Thread t = new Thread(() -> {
+            synchronized (Thread.currentThread()) {
+                try {
+                    Thread.currentThread().wait();
+                } catch (InterruptedException e) {}
+            }
+        });
+        t.start();
+        System.out.println(t.getState()); // Outputs: WAITING
+
+TIMED_WAITING
+    Description: The thread is waiting for another thread to signal, but only for a specified period.
+    How to Reach:
+    Using methods like Thread.sleep(time), Object.wait(time), or Thread.join(time).
+    Example
+        Thread t = new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+        });
+        t.start();
+        System.out.println(t.getState()); // Outputs: TIMED_WAITING
+
+TERMINATED
+    Description: The thread has completed execution.
+    How to Reach: Once the run() method completes or the thread exits, it moves to the TERMINATED state.
+    Example:
+        Thread t = new Thread(() -> {});
+        t.start();
+
+        try { t.join(); } catch (InterruptedException e) {}
+
+        System.out.println(t.getState()); // Outputs: TERMINATED
+
+

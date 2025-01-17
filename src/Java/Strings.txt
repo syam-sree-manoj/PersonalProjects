@@ -1,0 +1,49 @@
+########################################################################################################################
+    // reverse a string
+    String original = "Hello";
+    String reversed = new StringBuilder(original).reverse().toString();
+
+########################################################################################################################
+    // what is the difference
+    String[] arr = {"A", "B"};
+    String[] objectArray = {new String("A"), new String("B")};
+    /*
+    These two Practice.arrays are different in terms of how the string elements are stored and referenced.
+    String[] original = {"A", "B"};
+        This array uses string literals.
+        Strings "A" and "B" are interned in the string pool.
+        The string pool is a special memory area in Java where identical string literals are stored only once.
+        "A" and "B" in this array are references to the same objects in the string pool.
+        If another part of the program creates "A" or "B" as a literal, they will refer to the same objects in the string pool.
+
+    String[] objectArray = {new String("A"), new String("B")};
+        This array explicitly creates new String objects using the new keyword.
+        These strings are not interned. Each new String("A") creates a distinct object in heap memory.
+        Even though the string values are the same ("A" and "B"), the references in objectArray point to different objects compared to those in the string pool (and even compared to each other).
+
+    // Compare references
+        System.out.println(original[0] == "A");  // true (same object in string pool)
+        System.out.println(objectArray[0] == "A");  // false (different object in heap)
+
+    // Compare content
+        System.out.println(original[0].equals("A"));  // true (content is the same)
+        System.out.println(objectArray[0].equals("A"));  // true (content is the same)
+
+    // Check if objects are the same
+        System.out.println(original[0] == objectArray[0]);  // false (different objects)
+     */
+
+########################################################################################################################
+Clone in java
+
+Behavior of clone for Arrays:
+    Primitive Types:
+        If the array contains primitive types (e.g., int, char, etc.), changes to the original array will not affect the cloned array because the values are copied.
+
+    Reference Types:
+        If the array contains references to objects, the clone operation creates a shallow copy:
+        The array itself is a new object (a new memory location).
+        However, the elements inside the array (object references) point to the same objects in memory.
+        Thus, changes to the objects themselves will affect both the original and the cloned Practice.arrays.
+
+########################################################################################################################

@@ -1,0 +1,10 @@
+
+List<String> words = Arrays.asList("apple", "banana", "cherry", "date");
+
+List<String> names = List.of("Alice", "Bob", "Charlie");
+List<String> filteredNames = names.stream()
+                                   .filter(name -> name.startsWith("A"))
+                                   .collect(Collectors.toList());
+System.out.println(filteredNames); // Output: [Alice]
+
+TreeSet<String> set = new TreeSet<>(Comparator.reverseOrder());

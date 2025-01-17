@@ -1,0 +1,34 @@
+package Java;
+
+/*
+Common Functional Interfaces (From java.util.function Package):
+Predicate: Tests a condition and returns a boolean.
+Function: Applies a function to an input and returns a result.
+Consumer: Consumes an input and performs an operation without returning anything.
+Supplier: Supplies a value without any input.
+
+A static method in an interface belongs to the interface itself and cannot be overridden by implementing classes.
+A default method in an interface is a method that has a default implementation.
+It allows interfaces to provide a method body, which implementing classes can inherit or override.
+This feature enables backward compatibility without forcing changes in all implementing classes when new methods are added to the interface.
+
+ */
+
+public class InterfaceVSAbstractClass {
+}
+@FunctionalInterface
+interface Calculator {
+    // Abstract method (the functional interface requirement)
+    int calculate(int a, int b);
+
+    // Default method (provides reusable logic that can be overridden by implementing classes)
+    default void displayResult(int result) {
+        System.out.println("The result is: " + result);
+    }
+
+    // Static method (utility function that belongs to the interface itself)
+    static void greet() {
+        System.out.println("Welcome to the Calculator interface!");
+    }
+}
+
