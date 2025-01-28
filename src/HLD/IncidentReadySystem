@@ -1,0 +1,85 @@
+How would you design and set up a service to be ‘incident ready’?
+
+
+1. Plan for Redundancy and High Availability
+    What to do:
+        Deploy services across multiple availability zones (AZs) or regions to ensure resilience against localized failures.
+        Use load balancers to distribute traffic across healthy instances.
+        Implement failover mechanisms for critical services.
+    Tools:
+        Cloud-native services like AWS Elastic Load Balancer, Azure Traffic Manager, or Google Cloud Load Balancer.
+    Benefits:
+        Ensures uptime even during partial outages.
+
+2. Set Up Monitoring and Alerting
+    What to do:
+        Monitor key performance indicators (KPIs) like CPU usage, memory, latency, and error rates.
+        Use tools to define thresholds and set up alerts for abnormal activity.
+    Tools:
+        Cloud-native monitoring: AWS CloudWatch, Azure Monitor, Google Cloud Operations Suite.
+        Third-party tools: Datadog, New Relic, Prometheus, Grafana.
+    Benefits:
+        Enables early detection of potential issues.
+3. Enable Centralized Logging
+    What to do:
+        Aggregate logs from all service components into a centralized system.
+        Ensure logs include timestamps, error codes, and context for debugging.
+    Tools:
+        Logging tools: ELK Stack (Elasticsearch, Logstash, Kibana), Fluentd, Splunk, AWS CloudTrail.
+    Benefits:
+        Provides detailed context for incident investigation.
+4. Implement Health Checks
+    What to do:
+        Set up periodic health checks for all critical components (e.g., APIs, databases).
+        Use proactive monitoring to check for readiness and liveness.
+    How to implement:
+        Use HTTP-based health check endpoints (/health, /ready) that verify service dependencies.
+    Benefits:
+        Detects unhealthy services and removes them from traffic routing.
+5. Automate Incident Response
+    What to do:
+        Automate common incident resolutions (e.g., restarting failed services, scaling resources).
+        Use runbooks and workflows for incident playbooks.
+    Tools:
+        AWS Systems Manager, PagerDuty Automation, Runbook Automation (RBA) tools.
+    Benefits:
+        Reduces mean time to resolution (MTTR).
+6. Design for Observability
+    What to do:
+        Use structured logging, distributed tracing, and metrics for end-to-end observability.
+        Implement OpenTelemetry or similar frameworks for tracing and metrics.
+    Tools:
+        Distributed tracing: Jaeger, Zipkin, AWS X-Ray.
+        Metrics: Prometheus, Cloud-native monitoring dashboards.
+    Benefits:
+        Helps trace issues across microservices and pinpoint failures.
+8. Test Disaster Recovery and Incident Scenarios
+    What to do:
+        Regularly simulate failures (e.g., network outage, database crash).
+        Conduct chaos engineering exercises to test system resilience.
+    Tools:
+        Chaos tools: Chaos Monkey, Gremlin.
+        Backup and restore tools: AWS Backup, Azure Site Recovery.
+    Benefits:
+        Prepares teams for real-world incidents and ensures disaster recovery plans work.
+9. Implement Security Best Practices
+    What to do:
+        Protect systems against security incidents (e.g., DDoS attacks, unauthorized access).
+        Set up identity and access management (IAM), encryption, and firewalls.
+    Tools:
+        AWS Shield, Azure DDoS Protection, Web Application Firewalls (WAFs).
+    Benefits:
+        Reduces risk of security-related incidents.
+10. Enable Postmortems and Continuous Improvement
+    What to do:
+        After resolving an incident, perform a root cause analysis (RCA).
+        Document lessons learned and improve systems to prevent similar incidents.
+    Tools:
+        Incident management platforms or custom RCA templates.
+    Benefits:
+        Ensures the system becomes more robust over time.
+
+Key Outcomes of Being Incident-Ready
+    Reduced Downtime: Systems can recover quickly after an incident.
+    Improved User Experience: Issues are detected and resolved before affecting customers.
+    Team Confidence: Clear processes reduce stress and improve response times during incidents.

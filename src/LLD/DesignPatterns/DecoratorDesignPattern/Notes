@@ -1,0 +1,6 @@
+Used to avoid class explosion
+
+used when there are features that needs to be added to a product and user can choose any number of features
+Ex : vegDelight(base product) + Toppings/features like mushroom + extra cheese + tandoor ect
+
+Decorator pattern follows IS-A and HAS-A relation both at once

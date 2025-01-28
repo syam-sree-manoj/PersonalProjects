@@ -1,0 +1,41 @@
+In Java, an interface can include:
+
+    Abstract Methods: Methods that do not have a body.
+    Default Methods: Methods with a body that can be overridden.
+    Static Methods: Methods with a body that belong to the interface.
+    Fields: Must be public, static, and final.
+
+
+
+interface Vehicle {
+    // Fields (constants)
+    String TYPE = "Transport"; // Implicitly public, static, and final
+
+    // Abstract method
+    void start();
+
+    // Default method
+    default void displayType() {
+        System.out.println("Vehicle type: " + TYPE);
+    }
+
+    // Static method
+    static void service() {
+        System.out.println("Vehicle needs servicing.");
+    }
+}
+
+
+functional interface can have multiple default methods, but it must have exactly one abstract method to qualify as a functional interface.
+A functional interface in Java is an interface that contains exactly one abstract method, allowing it to be used with lambda expressions or method references
+It can also have default and static methods.
+
+@FunctionalInterface
+interface Calculator {
+    int add(int a, int b); // Single abstract method
+
+    // Default method
+    default void show() {
+        System.out.println("Calculator functional interface");
+    }
+}

@@ -1,0 +1,62 @@
+1. How do you sustain a high level of energy and motivation for your work over long periods?
+    Passion for Learning and Growth
+    Breaks and Downtime
+    Setting Achievable Goals
+    Connecting with the Purpose of the Work
+        Reminding myself of the impact my work has—whether it's for the team, customers, or a larger goal—helps me stay engaged.
+    Collaboration and Team Support
+        Interacting with teammates and sharing ideas often brings fresh energy to my work.
+    Regular Reflection
+    Celebrating Small Wins
+
+2. Tell me about a time when you had to stay positive in a difficult situation. How did your attitude affect the team? (Positive)
+
+    Example Response Using STAR Method:
+
+    Situation:
+    In my previous role, we were approaching a critical product launch when a major bug was discovered just a few days before the deadline. The team was already working long hours, and the discovery created a lot of stress and frustration.
+
+    Task:
+    As a key contributor to the project, my task was to address the issue quickly, while also ensuring the team stayed motivated and focused during this high-pressure situation.
+
+    Action:
+    I chose to remain calm and positive, acknowledging the challenge but emphasizing that we had solved tough problems before. I encouraged open communication and suggested we divide the problem into smaller tasks, assigning specific responsibilities to team members. I also stayed available to support anyone who needed help.
+
+    Result:
+    The team rallied together, resolved the bug within 48 hours, and successfully launched the product on time. My positive attitude helped ease the tension, fostered collaboration, and kept morale high, which directly contributed to our success.
+
+    Impact:
+    The situation reinforced the importance of positivity, especially in difficult moments, as it creates a ripple effect that uplifts the entire team and helps achieve collective goals.
+
+3. Tell me about a time when your curiosity led you to learn something valuable for your role (Curious)
+
+    Situation:
+    While working on a project to optimize database performance in my previous role, I noticed recurring delays in query execution that weren’t addressed by conventional optimization techniques. I was curious to understand the root cause and suspected there might be deeper architectural inefficiencies.
+
+    Task:
+    My goal was to investigate and identify the underlying issue, even though it went beyond the immediate scope of my responsibilities.
+
+    Action:
+    I took the initiative to explore the database's query execution plans and researched advanced indexing strategies. Through my curiosity, I discovered an indexing method called "partial indexes" that was particularly suited for our use case. I dedicated time outside work hours to learn how it could be applied to our system and ran experiments in a test environment.
+
+    Result:
+    Implementing the partial indexes reduced query execution time by 40%, significantly improving the application's performance. This learning not only solved the immediate issue but also equipped me with a deeper understanding of database optimization techniques, which I later applied to other projects.
+
+    Impact:
+    My curiosity helped address a critical bottleneck and added value to the team by introducing a new optimization strategy. It also demonstrated to my colleagues the importance of going beyond the surface to find innovative solutions.
+
+4. Tell me about a time when you had to accept feedback on your performance. How did you respond
+    Situation:
+    In a previous project, I was leading a development team to build a feature for a web application. During the review, my manager pointed out that I had overlooked some critical edge cases in the code, which could potentially cause issues for end users.
+
+    Task:
+    I needed to acknowledge the feedback, address the issues promptly, and ensure the team continued to stay on track while maintaining the quality of the project.
+
+    Action:
+    I took the feedback constructively, accepting that I had missed the edge cases in my initial approach. I immediately went back to the code, implemented additional test cases to cover the edge scenarios, and ran through thorough testing. I also set up a meeting with my team to go over these issues and ensure everyone was on the same page about the importance of edge case testing in the future.
+
+    Result:
+    The feature was successfully released with minimal issues. The additional tests I implemented caught the potential bugs before deployment, ensuring a smooth rollout. My manager appreciated my openness to feedback and my proactive approach in addressing the problem, and it also set a precedent for the team to value comprehensive testing.
+
+    Impact:
+    The experience helped me learn the importance of paying attention to edge cases and continuously improving my testing practices. It reinforced the idea that constructive feedback is an opportunity to learn and grow, and it positively impacted the way I approached future projects.

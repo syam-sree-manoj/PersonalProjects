@@ -1,0 +1,46 @@
+How to Handle Hash Collisions
+    In practice, hash collisions are a critical consideration in data structures like hash tables. Common techniques to handle collisions include:
+
+1. Chaining (Separate Chaining)
+    Description: Each bucket in the hash table holds a linked list (or another data structure like a dynamic array) of all elements that hash to the same value.
+    How It Works:
+        When a collision occurs, the new item is appended to the list at the bucket.
+        When searching, iterate through the list in the bucket to find the target.
+    Advantages:
+        Simple to implement.
+        Handles collisions well if the load factor is kept low.
+    Disadvantage: Performance degrades if many elements are hashed to the same bucket.
+
+2. Open Addressing
+    Description: Instead of using a separate data structure, collisions are resolved by finding another position in the hash table (probing).
+    Types:
+        Linear Probing: Sequentially check the next slot until an empty slot is found.
+        Quadratic Probing: Check slots by a quadratic function of the index
+        Double Hashing: Use a secondary hash function to determine the step size for probing.
+    Advantages:
+        Avoids extra memory for linked lists.
+    Disadvantages:
+        More complex to implement.
+        Clustering can occur (especially with linear probing), degrading performance.
+3. Rehashing
+    Description: Use a different hash function to redistribute elements when a collision occurs or when the load factor exceeds a threshold.
+    How It Works:
+        Compute a new hash value using a secondary function and try another bucket.
+    Advantage: Reduces clustering compared to probing.
+    Disadvantage: More computationally expensive.
+4. Cuckoo Hashing
+    Description: Use two (or more) hash functions and allow elements to "kick out" other elements if a collision occurs.
+    How It Works:
+        When a collision occurs, the new element replaces the existing one, which is rehashed and placed in another bucket.
+    Advantages:
+        Constant-time lookups.
+    Disadvantages:
+        Involves rehashing cycles, which can be costly.
+5. Perfect Hashing
+    Description: Create a hash function specifically designed for the given dataset to avoid collisions entirely.
+    Use Case: Best for static datasets where the input does not change.
+
+The choice of method depends on:
+    Load Factor: Ratio of elements to buckets.
+    Space vs. Time Complexity: Open addressing is more space-efficient, while chaining can handle high loads more effectively.
+    Application Requirements: Some applications prioritize lookup speed, while others focus on minimizing memory usage.

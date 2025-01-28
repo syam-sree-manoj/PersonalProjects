@@ -1,0 +1,75 @@
+Definition of Liskov Substitution Principle (LSP):
+    If a program is using a base class, then it should be able to use any of its derived classes without knowing it.
+    Subtypes must be substitutable for their base types without affecting the behavior or functionality of the system.
+
+To adhere to LSP:
+    Ensure all subclasses fully implement the behavior expected by the base class or interface.
+    Avoid introducing methods or behaviors in a subclass that change the expected behavior of the base class.
+
+With LSP (Correct Design):
+
+    // Abstraction
+    interface MessageService {
+        void sendMessage(String message);
+    }
+
+    // Low-Level Module 1
+    class EmailService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Sending Email: " + message);
+        }
+    }
+
+    // Low-Level Module 2
+    class SMSService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Sending SMS: " + message);
+        }
+    }
+
+    // High-Level Module
+    class Notification {
+        private MessageService messageService;
+
+        public Notification(MessageService messageService) {
+            this.messageService = messageService;
+        }
+
+        void send(String message) {
+            messageService.sendMessage(message);
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            MessageService emailService = new EmailService();
+            Notification emailNotification = new Notification(emailService);
+            emailNotification.send("Hello, LSP with Email!");
+
+            MessageService smsService = new SMSService();
+            Notification smsNotification = new Notification(smsService);
+            smsNotification.send("Hello, LSP with SMS!");
+        }
+    }
+
+
+
+Violating LSP (Incorrect Design):
+    class PushNotificationService implements MessageService {
+        public void sendMessage(String message) {
+            throw new UnsupportedOperationException("Push notifications not supported yet");
+        }
+    }
+    public class Main {
+        public static void main(String[] args) {
+            MessageService pushService = new PushNotificationService();
+            Notification pushNotification = new Notification(pushService);
+
+            // This will throw an exception, breaking the expected behavior
+            pushNotification.send("Hello, LSP!");
+        }
+    }
+
+
+If you use PushNotificationService with Notification, it breaks the LSP
+The PushNotificationService does not fully adhere to the contract defined by MessageService. It introduces unexpected behavior (throws an exception) that breaks the functionality of the Notification class.

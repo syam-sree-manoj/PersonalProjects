@@ -2,4 +2,90 @@ Definition
     High-level modules should not depend on low-level modules. Both should depend on abstractions.
     Abstractions should not depend on details. Details should depend on abstractions.
 
+Key Concepts:
+    High-Level Modules: Contain the core business logic and policies.
+    Low-Level Modules: Perform specific details like database access, file operations, or APIs.
+    Abstractions: Typically interfaces or abstract classes that act as a bridge between high-level and low-level modules.
 
+Without DIP (Tightly Coupled Code):
+    class EmailService {
+        void sendEmail(String message) {
+            System.out.println("Sending Email: " + message);
+        }
+    }
+
+    class Notification {
+        private EmailService emailService;
+
+        public Notification() {
+            this.emailService = new EmailService(); // Tightly coupled
+        }
+
+        void send(String message) {
+            emailService.sendEmail(message);
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            Notification notification = new Notification();
+            notification.send("Hello, DIP!");
+        }
+    }
+Problems:
+        Notification directly depends on EmailService.
+        Adding another service (e.g., SMS) requires modifying Notification.
+        Code is harder to test because you cannot easily mock EmailService.
+
+
+With DIP (Loosely Coupled Code):
+    // Abstraction
+    interface MessageService {
+        void sendMessage(String message);
+    }
+
+    // Low-Level Module 1
+    class EmailService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Sending Email: " + message);
+        }
+    }
+
+    // Low-Level Module 2
+    class SMSService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Sending SMS: " + message);
+        }
+    }
+
+    // High-Level Module
+    class Notification {
+        private MessageService messageService;
+
+        // Dependency injected via constructor
+        public Notification(MessageService messageService) {
+            this.messageService = messageService;
+        }
+
+        void send(String message) {
+            messageService.sendMessage(message);
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            // Use EmailService
+            MessageService emailService = new EmailService();
+            Notification emailNotification = new Notification(emailService);
+            emailNotification.send("Hello, DIP with Email!");
+
+            // Use SMSService
+            MessageService smsService = new SMSService();
+            Notification smsNotification = new Notification(smsService);
+            smsNotification.send("Hello, DIP with SMS!");
+        }
+    }
+
+Advantages:
+    Notification depends on the MessageService abstraction, not concrete implementations.
+    Adding new services like PushNotificationService is easy.

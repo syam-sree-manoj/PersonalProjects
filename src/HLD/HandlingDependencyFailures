@@ -1,0 +1,95 @@
+When a dependency service fails, your service must implement strategies to maintain a smooth user experience while handling failures gracefully. Here are key approaches to address this situation:
+
+1. Graceful Degradation
+    What: Provide reduced functionality instead of a complete failure.
+    How:
+        Offer cached or default data if the dependency is unavailable.
+        Inform users that some features are temporarily limited.
+    Example:
+        If a payment gateway fails, allow users to save their cart and complete payment later.
+        Show a "last known data" view if a data-fetching service fails.
+2. Circuit Breaker Pattern
+    What: Prevent overloading a failing dependency by stopping further requests once failures are detected.
+    How:
+        Implement a circuit breaker library (e.g., Hystrix, Resilience4j).
+        Monitor failures and open the circuit after a threshold is reached.
+        Automatically close the circuit once the dependency recovers.
+    Example:
+        If an external API is slow or unresponsive, stop calling it and return a fallback response.
+3. Fallback Mechanism
+    What: Provide alternative responses or behavior when a dependency fails.
+    How:
+        Use predefined default responses.
+        Use a secondary backup service or data source.
+        Allow users to retry certain operations.
+    Example:
+        If a weather API fails, display a message like "Weather data is unavailable right now. Please try again later."
+4. Caching
+    What: Serve cached data during dependency downtime to reduce impact.
+    How:
+        Implement an in-memory cache (e.g., Redis, Memcached).
+        Cache responses from dependencies with appropriate TTL (time-to-live).
+    Example:
+    If a product catalog API fails, display a cached version of the product list.
+5. Retry Mechanism
+    What: Retry requests to the dependency service in case of temporary failures.
+    How:
+        Use exponential backoff with a jitter to prevent overloading.
+        Implement retry policies for transient errors.
+    Example:
+        Retry a payment confirmation API call a few times before reporting failure to the user.
+6. Timeouts
+    What: Set a time limit for dependency responses to avoid indefinite waiting.
+    How:
+    Configure timeouts for each API call to dependencies.
+    Define reasonable timeout values based on SLA requirements.
+    Example:
+    If a dependency API takes more than 3 seconds, terminate the call and handle the failure.
+7. Rate Limiting
+    What: Limit the rate of requests to dependencies to prevent overloading them during recovery.
+    How:
+    Apply rate limits to specific endpoints or users.
+    Use tokens, buckets, or queue-based systems to manage request flow.
+    Example:
+    Reduce the number of requests to a dependency API to ensure better recovery.
+8. Asynchronous Processing
+    What: Queue requests for processing later instead of failing immediately.
+    How:
+        Use message queues (e.g., Kafka, RabbitMQ, AWS SQS) to hold requests.
+        Process queued requests when the dependency is available.
+    Example:
+        If a user-upload service fails, store the file in a queue and process it once the dependency recovers.
+9. User Notifications
+    What: Keep users informed about the issue and recovery timeline.
+    How:
+        Display friendly error messages or banners.
+        Provide alternative actions or workarounds.
+    Example:
+    "Some features are temporarily unavailable. We’re working to fix this. Thank you for your patience."
+10. Monitoring and Alerts
+    What: Actively monitor the dependency’s health to detect failures early.
+    How:
+    Set up health checks for dependency services.
+    Create alerts for slow responses, timeouts, or high error rates.
+    Example:
+    Use monitoring tools like Prometheus, Grafana, or Datadog to detect issues.
+11. Service Independence
+    What: Design your system to minimize tight coupling with dependencies.
+    How:
+        Use bulkheads to isolate dependency failures from affecting the entire system.
+        Decouple critical features from non-critical dependency services.
+    Example:
+        If a logging service fails, ensure it doesn’t block the primary business logic.
+12. Fail-Fast Mechanism
+    What: Immediately respond with an error or fallback when the dependency is known to be down.
+    How:
+    Use dependency health checks to quickly detect unavailability.
+    Avoid calling a failing service unnecessarily.
+    Example:
+    If a recommendation engine is offline, skip fetching recommendations and render the page faster.
+
+Summary Workflow
+    Detect failure: Use monitoring, circuit breakers, or health checks.
+    Respond gracefully: Apply caching, fallbacks, or default responses.
+    Recover: Retry with backoff or queue requests for later processing.
+    Inform users: Show clear, friendly error messages or updates

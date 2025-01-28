@@ -3,6 +3,16 @@ import java.util.*;
 // https://leetcode.com/problems/string-matching-in-an-array/
 // ** very well explained Knuth–Morris–Pratt KMP - https://www.youtube.com/watch?v=JoF0Z7nVSrA
 public class KMPAlgo {
+    /*
+
+    text    = A A A X A A A X
+    pattern = A A A A
+
+    LPS = Longes Prefix Suffix ; we look at longest Prefix of that string and that is also suffix of that substring
+
+
+     */
+
     public List<String> stringMatching(String[] words) {
         List<String> ans = new ArrayList<>();
         int n = words.length;

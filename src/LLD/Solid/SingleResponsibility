@@ -1,0 +1,52 @@
+Key Concepts of SRP:
+    Single Responsibility: A class should only handle one specific responsibility or concern.
+    Reason to Change: A class should be modified for only one reason. If it has more than one reason to change, it likely has more than one responsibility.
+
+Violating SRP
+    class TaskManager {
+        public void doTask() {
+            // Task logic
+            System.out.println("Task is being done...");
+
+            // Logging logic (violates SRP)
+            System.out.println("Task done at: " + System.currentTimeMillis());
+        }
+    }
+TaskManager is responsible for both performing the task and logging the event, violating SRP.
+
+
+
+With SRP
+
+    // Class responsible for logging
+    class Logger {
+        public void log(String message) {
+            System.out.println("Log message: " + message);
+        }
+    }
+
+    // Class responsible for task logic
+    class TaskManager {
+        private Logger logger;
+
+        public TaskManager(Logger logger) {
+            this.logger = logger;
+        }
+
+        public void doTask() {
+            // Task logic
+            System.out.println("Task is being done...");
+
+            // Delegate logging to Logger class
+            logger.log("Task done at: " + System.currentTimeMillis());
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            Logger logger = new Logger();
+            TaskManager taskManager = new TaskManager(logger);
+            taskManager.doTask();
+        }
+    }
+Now, the TaskManager class only handles the task, while the Logger class is responsible for logging, respecting SRP.

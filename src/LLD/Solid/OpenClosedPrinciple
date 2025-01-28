@@ -1,0 +1,87 @@
+Key Concepts of the Open/Closed Principle:
+    Open for Extension: The behavior of a class can be extended or enhanced.
+    Closed for Modification: The existing code (class) should not be modified. New features or functionality should be added through new classes, interfaces, or methods.
+
+Without OCP
+    class Notification {
+        private boolean isEmail;
+
+        // Constructor
+        public Notification(boolean isEmail) {
+            this.isEmail = isEmail;
+        }
+
+        void send(String message) {
+            if (isEmail) {
+                sendEmail(message); // Email-specific code
+            } else {
+                sendSMS(message); // SMS-specific code
+            }
+        }
+
+        private void sendEmail(String message) {
+            System.out.println("Sending Email: " + message);
+        }
+
+        private void sendSMS(String message) {
+            System.out.println("Sending SMS: " + message);
+        }
+    }
+In this design, to add another notification type (say, Push Notifications), you would have to modify the Notification class again, which goes against the Closed for Modification aspect of OCP.
+
+
+
+
+With OCP
+    // Step 1: Define an abstraction for sending messages
+    interface MessageService {
+        void sendMessage(String message);
+    }
+
+    // Step 2: Implement concrete classes for different message types
+    class EmailService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Sending Email: " + message);
+        }
+    }
+
+    class SMSService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Sending SMS: " + message);
+        }
+    }
+
+    class PushNotificationService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Sending Push Notification: " + message);
+        }
+    }
+
+    // Step 3: High-level module (Notification) stays closed for modification
+    class Notification {
+        private MessageService messageService;
+
+        public Notification(MessageService messageService) {
+            this.messageService = messageService;
+        }
+
+        void send(String message) {
+            messageService.sendMessage(message);
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            MessageService emailService = new EmailService();
+            Notification emailNotification = new Notification(emailService);
+            emailNotification.send("Hello, OCP with Email!");
+
+            MessageService smsService = new SMSService();
+            Notification smsNotification = new Notification(smsService);
+            smsNotification.send("Hello, OCP with SMS!");
+
+            MessageService pushService = new PushNotificationService();
+            Notification pushNotification = new Notification(pushService);
+            pushNotification.send("Hello, OCP with Push Notification!");
+        }
+    }

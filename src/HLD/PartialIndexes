@@ -1,0 +1,28 @@
+What Are Partial Indexes?
+    A partial index is an index built on a subset of a table's data, defined by a filter condition (a WHERE clause). Unlike a regular index, which indexes every row in a table, a partial index only indexes rows that meet the criteria specified in the filter condition.
+
+How Partial Indexes Work
+    Consider the scenario where you have a large table, but only a small portion of the data is queried frequently or needs indexing. A partial index can significantly reduce the size of the index by only including those rows that meet certain conditions, thereby improving query performance and reducing storage overhead.
+
+For example, if you have a table Orders with columns order_id, customer_id, and order_status, and you frequently query for only the "shipped" orders, a partial index would be ideal.
+CREATE INDEX idx_shipped_orders
+ON Orders (order_id)
+WHERE order_status = 'shipped';
+
+This partial index would only index rows where the order_status is 'shipped'. Queries filtering by order_status = 'shipped' would benefit from faster performance, while queries with other statuses (like 'pending' or 'delivered') would not be impacted.
+
+Advantages of Partial Indexes:
+    Reduced Storage Space: Since partial indexes only index a subset of data, they require less disk space compared to full indexes.
+    Improved Query Performance: Queries that use the same filtering condition as the partial index will benefit from faster lookup times, as the index is smaller and more focused on relevant data.
+    Faster Insert/Update Operations: Updates and inserts that don’t affect the indexed rows won’t require changes to the partial index, making them faster than if the index were applied to all rows.
+    Less Maintenance Overhead: Since the partial index only covers a subset of the data, it can be more efficient to maintain, particularly for large tables where only a portion of the data is queried frequently.
+
+Disadvantages of Partial Indexes:
+    Limited Use: Partial indexes are only effective if queries consistently use the same filtering condition that the index is based on. If your queries vary significantly, a partial index may not be as useful.
+    Complexity: It adds some complexity to index management since you need to ensure that the filter condition matches the most common query patterns.
+
+When to Use Partial Indexes:
+    Selective Queries: Use a partial index when you frequently query a specific subset of data (e.g., a specific status in an order table).
+    Sparsely Populated Columns: If a column has many null or infrequent values but you query only a specific set of those values, a partial index can significantly reduce the size of the index.
+    Large Tables with Specific Query Patterns: If you have a large table and certain types of queries run frequently, creating a partial index that covers only the data used in those queries can improve performance without wasting resources on unnecessary indexing.
+

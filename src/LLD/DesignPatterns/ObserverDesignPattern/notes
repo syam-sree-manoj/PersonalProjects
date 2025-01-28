@@ -1,0 +1,9 @@
+we use observer design pattern when if there is a change in state of observable all the observers needs to be notified or do some process
+
+an observer can have many observables
+an observable can have many observers
+so M:M relation
+each on each side
+
+Create interface observable (containing all methods)
+Create interface observer (containing only update method where the logic lies on how to deal with change in state of observable)
