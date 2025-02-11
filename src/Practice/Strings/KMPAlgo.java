@@ -1,4 +1,4 @@
-package Practice.arrays;
+package Practice.Strings;
 import java.util.*;
 // https://leetcode.com/problems/string-matching-in-an-array/
 // ** very well explained Knuth–Morris–Pratt KMP - https://www.youtube.com/watch?v=JoF0Z7nVSrA
@@ -8,9 +8,11 @@ public class KMPAlgo {
     text    = A A A X A A A X
     pattern = A A A A
 
-    LPS = Longes Prefix Suffix ; we look at longest Prefix of that string and that is also suffix of that substring
+    LPS = Longes Prefix Suffix ; we look at longest Prefix of pattern and that is also suffix of that substring
 
 
+    for making LPS use example
+    pattern = A A A C A A A A
      */
 
     public List<String> stringMatching(String[] words) {
@@ -37,12 +39,13 @@ public class KMPAlgo {
             if (text.charAt(i) == pattern.charAt(j)) {
                 i++;
                 j++;
-            } else if (j == 0) {
-                i++;
-            } else {
-                j = lps[j - 1];
+            } else{
+                if( j == 0){
+                    i++;
+                }else{
+                    j = lps[j-1];
+                }
             }
-
             if (j == pattern.length()) {
                 return true;
             }
